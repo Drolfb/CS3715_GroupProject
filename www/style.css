@@ -1,4 +1,5 @@
 .btn {
+	/* Big juicy red button if we ever need more than one */
 	background-color:#ff7361;
 	width: 60%;
 	text-align: center;
@@ -29,6 +30,7 @@ body {
 	padding: 0;
 }
 #btndiv {
+	/* Pretty much just finds the center of the screen no matter what the screen is */
 	height:70%;
 	width: 100%;
 	position:absolute;
@@ -45,6 +47,7 @@ body {
 	font-family: Helvetica, Lucinda, sans-serif;
 }
 #logo {
+	/* Might be able to just use #btndiv for this, but it's here if you need it to be styled differently */
 	display:block;
 	margin:auto;
 }
