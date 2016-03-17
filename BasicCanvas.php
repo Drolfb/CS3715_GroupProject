@@ -1,4 +1,8 @@
 <html>
+    <head>
+        <link rel="stylesheet" href="style.css"/>
+        <title>QuickDraw </title>
+    </head>
 <script type="text/javascript">
 var canvas, ctx, flag = false,
     prevX = 0,
