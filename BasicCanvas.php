@@ -9,13 +9,11 @@ var canvas, ctx, flag = false,
     
     var x = "black", //sets the size of drawer
     y = 2;
-
 function init() { //creates the canvas
     canvas = document.getElementById('can');
     ctx = canvas.getContext("2d");
     w = canvas.width;
     h = canvas.height;
-
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
     }, false);
@@ -29,7 +27,6 @@ function init() { //creates the canvas
         findxy('out', e)
     }, false);
 }
-
 function color(obj) { //creates the black color to draw and white for eraser 
                       //more can be added if desired
     switch (obj.id) {
@@ -43,7 +40,6 @@ function color(obj) { //creates the black color to draw and white for eraser
     if (x == "white") y = 14;
     else y = 2;
 }
-
 function draw() { //creates the drawing tool
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
@@ -53,23 +49,12 @@ function draw() { //creates the drawing tool
     ctx.stroke();
     ctx.closePath();
 }
-
-function erase() { //creates the eraser
-    var m = confirm("Want to clear");
-    if (m) {
-        ctx.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-    }
-}
-
-
 function findxy(res, e) {   //cursor positioning
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
         currX = e.clientX - canvas.offsetLeft;
         currY = e.clientY - canvas.offsetTop;
-
         flag = true;
         dot_flag = true;
         if (dot_flag) {
@@ -96,9 +81,9 @@ function findxy(res, e) {   //cursor positioning
 </script>   
 <body onload="init()">  
     <canvas id="can" width="800" height="800" style="position:absolute;top:3%;left:3%;border:3px solid;"></canvas>
-    <div style="position:absolute;top:4%;left:14%;width:20px;height:20px;background:black;" id="black" onclick="color(this)"></div>
+    <button id="black" onclick="color(this)"></div>
     <div style="position:absolute;top:4%;left:4%;">Eraser</div>
-    <div style="position:absolute;top:4%;left:7%;width:20px;height:20px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+    <button id="white" onclick="color(this)"></div>
     <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
     <div style="position:absolute;top:4%;left:10%;">Draw Tool</div>
 </body>
