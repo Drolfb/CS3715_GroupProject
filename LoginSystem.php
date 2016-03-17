@@ -9,14 +9,14 @@
         $inputPassword = $_POST["password"];
     
         // MySQL username and password.
-        $MySQLusername = root;
-        $MySQLpassword = root;
+        $MySQLusername = cs3715_tb6774;
+        $MySQLpassword = purplesilver7;
         
         // Create database connection using PHP Data Object (PDO).
-        $db = new PDO("mysql:host=localhost;dbname=QuickDraw_Test", $MySQLusername, $MySQLpassword);
+        $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
         
         // Name of the table we are using for the database.
-        $MySQLtable = 'UserInfo';
+        $MySQLtable = 'testUserInfo';
 
         // Grabbing everything from the table
         $userInfoTable = $db->query('SELECT * from '.$MySQLtable);
@@ -26,8 +26,9 @@
 
         // Run through the MySQL table  and compare it with the user's input data. 
         while($rows = $userInfoTable->fetch()) {
-            if ($rows['Username'] == $inputUsername) {
-                if ($rows['Password'] == $inputPassword) {
+            // echo "rows[0]=" . $rows[0] . " rows[1]=" . $rows[1] . " rows[2]=" . $rows[2] . "<br>";
+            if ($rows[1] == $inputUsername) {
+                if ($rows[2] == $inputPassword) {
                     echo "Login Success!";
                 }
             }
@@ -50,21 +51,22 @@
 <?php
 /**
  * Database Info
- * mysql> DESCRIBE UserInfo;
-+----------+----------+------+-----+---------+-------+
-| Field    | Type     | Null | Key | Default | Extra |
-+----------+----------+------+-----+---------+-------+
-| ID       | int(11)  | NO   | PRI | NULL    |       |
-| Username | tinytext | NO   | UNI | NULL    |       |
-| Password | tinytext | NO   |     | NULL    |       |
-+----------+----------+------+-----+---------+-------+
+mysql> DESCRIBE testUserInfo;
++----------+------------------+------+-----+---------+----------------+
+| Field    | Type             | Null | Key | Default | Extra          |
++----------+------------------+------+-----+---------+----------------+
+| ID       | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| username | varchar(30)      | NO   | UNI | NULL    |                |
+| password | varchar(12)      | NO   |     | NULL    |                |
++----------+------------------+------+-----+---------+----------------+
 
-mysql> SELECT * FROM UserInfo;
+mysql> SELECT * FROM testUserInfo;
 +----+----------+----------+
-| ID | Username | Password |
+| ID | username | password |
 +----+----------+----------+
-|  0 | Fred     | 123456   |
-|  1 | Brian    | 654321   |
+|  1 | Fred     | 123456   |
+|  2 | Brian    | 654321   |
+|  3 | Tyler    | password |
 +----+----------+----------+
  */
 ?>
