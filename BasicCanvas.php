@@ -1,8 +1,4 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css"/>
-        <title>QuickDraw </title>
-    </head>
 <script type="text/javascript">
 var canvas, ctx, flag = false,
     prevX = 0,
@@ -10,14 +6,16 @@ var canvas, ctx, flag = false,
     prevY = 0,
     currY = 0,
     dot_flag = false;
-    
-    var x = "black", //sets the size of drawer
+
+var x = "black",
     y = 2;
-function init() { //creates the canvas
+
+function init() {   //creates the canvas
     canvas = document.getElementById('can');
     ctx = canvas.getContext("2d");
     w = canvas.width;
     h = canvas.height;
+
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
     }, false);
@@ -31,20 +29,16 @@ function init() { //creates the canvas
         findxy('out', e)
     }, false);
 }
-function color(obj) { //creates the black color to draw and white for eraser 
-                      //more can be added if desired
+
+function color(obj) {   //makes the drawing tool black in color
     switch (obj.id) {
         case "black":
             x = "black";
             break;
-        case "white":
-            x = "white";
-            break;
     }
-    if (x == "white") y = 14;
-    else y = 2;
 }
-function draw() { //creates the drawing tool
+
+function draw() {  //drawing tool
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
     ctx.lineTo(currX, currY);
@@ -53,12 +47,29 @@ function draw() { //creates the drawing tool
     ctx.stroke();
     ctx.closePath();
 }
-function findxy(res, e) {   //cursor positioning
+
+function erase() { //Clears Entire Image from Canvas
+    var m = confirm("Clear Image?");
+    if (m) {
+        ctx.clearRect(0, 0, w, h);
+        document.getElementById("canvasimg").style.display = "none";
+    }
+}
+
+function save() {   //saves image
+    document.getElementById("canvasimg").style.border = "3px solid";
+    var dataURL = canvas.toDataURL();
+    document.getElementById("canvasimg").src = dataURL;
+    document.getElementById("canvasimg").style.display = "inline";
+}
+
+function findxy(res, e) {   //finds positioning
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
         currX = e.clientX - canvas.offsetLeft;
         currY = e.clientY - canvas.offsetTop;
+
         flag = true;
         dot_flag = true;
         if (dot_flag) {
@@ -82,13 +93,11 @@ function findxy(res, e) {   //cursor positioning
         }
     }
 }
-</script>   
-<body onload="init()">  
-    <canvas id="can" width="800" height="800" style="position:absolute;top:3%;left:3%;border:3px solid;"></canvas>
-    <button id="black" onclick="color(this)"></div>
-    <div style="position:absolute;top:4%;left:4%;">Eraser</div>
-    <button id="white" onclick="color(this)"></div>
+</script>
+<body onload="init()">
+    <canvas id="can" width="600" height="600" style="position:absolute;top:10%;left:10%;border:3px solid;"></canvas>
     <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
-    <div style="position:absolute;top:4%;left:10%;">Draw Tool</div>
+    <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:75%;left:10%;">
+    <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:75%;left:13%;">
 </body>
 </html>
