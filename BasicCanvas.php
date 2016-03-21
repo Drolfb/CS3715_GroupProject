@@ -6,16 +6,13 @@ var canvas, ctx, flag = false,
     prevY = 0,
     currY = 0,
     dot_flag = false;
-
 var x = "black",
     y = 2;
-
 function init() {   //creates the canvas
     canvas = document.getElementById('can');
     ctx = canvas.getContext("2d");
     w = canvas.width;
     h = canvas.height;
-
     canvas.addEventListener("mousemove", function (e) {
         findxy('move', e)
     }, false);
@@ -29,7 +26,6 @@ function init() {   //creates the canvas
         findxy('out', e)
     }, false);
 }
-
 function color(obj) {   //makes the drawing tool black in color
     switch (obj.id) {
         case "black":
@@ -37,7 +33,6 @@ function color(obj) {   //makes the drawing tool black in color
             break;
     }
 }
-
 function draw() {  //drawing tool
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
@@ -47,7 +42,6 @@ function draw() {  //drawing tool
     ctx.stroke();
     ctx.closePath();
 }
-
 function erase() { //Clears Entire Image from Canvas
     var m = confirm("Clear Image?");
     if (m) {
@@ -55,21 +49,18 @@ function erase() { //Clears Entire Image from Canvas
         document.getElementById("canvasimg").style.display = "none";
     }
 }
-
 function save() {   //saves image
     document.getElementById("canvasimg").style.border = "3px solid";
     var dataURL = canvas.toDataURL();
     document.getElementById("canvasimg").src = dataURL;
     document.getElementById("canvasimg").style.display = "inline";
 }
-
 function findxy(res, e) {   //finds positioning
     if (res == 'down') {
         prevX = currX;
         prevY = currY;
         currX = e.clientX - canvas.offsetLeft;
         currY = e.clientY - canvas.offsetTop;
-
         flag = true;
         dot_flag = true;
         if (dot_flag) {
@@ -97,7 +88,7 @@ function findxy(res, e) {   //finds positioning
 <body onload="init()">
     <canvas id="can" width="600" height="600" style="position:absolute;top:10%;left:10%;border:3px solid;"></canvas>
     <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
-    <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:75%;left:10%;">
-    <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:75%;left:13%;">
+    <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:7%;left:10%;">
+    <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:7%;left:13%;">
 </body>
 </html>
