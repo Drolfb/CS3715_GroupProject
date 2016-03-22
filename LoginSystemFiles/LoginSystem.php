@@ -1,72 +1,63 @@
 <!DOCTYPE html>
 <!-- Group Project, This is a super basic login/password system that is with 
      MySQL support. -->
-<html>
     <?php 
+        // session_start();
+        
         // Grabbing the information the user types in the username and password
         // forms.
         $inputUsername = $_POST["username"];
         $inputPassword = $_POST["password"];
+        global $actionLocation;
     
+        
         // MySQL username and password.
-        $MySQLusername = cs3715_tb6774;
-        $MySQLpassword = purplesilver7;
+        $MySQLusername = root; // cs3715_tb6774
+        $MySQLpassword = root; //purplesilver7
         
         // Create database connection using PHP Data Object (PDO).
-        $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
+        // When in MUN, make it  $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
+        $db = new PDO("mysql:host=localhost;dbname=QuickDraw_Test", $MySQLusername, $MySQLpassword);
         
         // Name of the table we are using for the database.
-        $MySQLtable = 'testUserInfo';
+        $MySQLtable = 'UserInfo'; // testUserInfo
 
         // Grabbing everything from the table
         $userInfoTable = $db->query('SELECT * from '.$MySQLtable);
         
         // Closing the database connection.
         $db = NULL;
-
-        // Run through the MySQL table  and compare it with the user's input data. 
-        while($rows = $userInfoTable->fetch()) {
+        
+        
+            // Run through the MySQL table  and compare it with the user's input data. 
+            while($rows = $userInfoTable->fetch()) {
             // echo "rows[0]=" . $rows[0] . " rows[1]=" . $rows[1] . " rows[2]=" . $rows[2] . "<br>";
-            if ($rows[1] == $inputUsername) {
-                if ($rows[2] == $inputPassword) {
-                    echo "Login Success!";
+                if (($rows[1] == $inputUsername) && ($rows[2] == $inputPassword)) {
+                        // header("Location:ExamplePage.html");
+                        $actionLocation = 'action="ExamplePage.html"';
+                        echo "$actionLocation";
+                        break;
+                }
+                else {
+                        // header("Location:LoginSystem.php");
+                        $actionLocation = 'action="LoginSystem.php"';
+                        echo "$actionLocation";
                 }
             }
-        }
-    ?>
-    <head>
-        <title>Project Login System</title>
-    </head>
-    <body>
-        <!-- Using POST to get user information in a secure matter. -->
-        <form action="LoginSystem.php" method="post">
-            <label>Username: </label><br>
-            <input type="text" name="username"><br> 
-            <label>Password: </label><br>
-            <input type="text" name="password"><br> 
-            <input type="submit" value="Log In">
-        </form>
-    </body>
-</html>
-<?php
-/**
- * Database Info
-mysql> DESCRIBE testUserInfo;
-+----------+------------------+------+-----+---------+----------------+
-| Field    | Type             | Null | Key | Default | Extra          |
-+----------+------------------+------+-----+---------+----------------+
-| ID       | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
-| username | varchar(30)      | NO   | UNI | NULL    |                |
-| password | varchar(12)      | NO   |     | NULL    |                |
-+----------+------------------+------+-----+---------+----------------+
-
-mysql> SELECT * FROM testUserInfo;
-+----+----------+----------+
-| ID | username | password |
-+----+----------+----------+
-|  1 | Fred     | 123456   |
-|  2 | Brian    | 654321   |
-|  3 | Tyler    | password |
-+----+----------+----------+
- */
+    
+echo '<html>';
+echo    '<head>';
+echo        '<title>Project Login System</title>';
+echo    '</head>';
+echo    '<body>';
+            //Using POST to get user information in a secure matter.
+echo        '<form '.  $actionLocation. ' method="post">';
+echo            '<label>Username: </label><br>';
+echo            '<input type="text" name="username"><br>'; 
+echo            '<label>Password: </label><br>';
+echo            '<input type="text" name="password"><br>'; 
+echo            '<input type="submit" value="Log In">';
+echo        '</form>';
+echo     '</body>';
+echo '</html>';
 ?>
