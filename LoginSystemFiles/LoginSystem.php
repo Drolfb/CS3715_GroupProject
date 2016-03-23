@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<!-- Group Project, This is a super basic login/password system that is with 
-     MySQL support. -->
-    <?php 
-        // session_start();
-        
+<?php
+        // For Later***SELECT * FROM UserInfo WHERE Username="Fred" and Password="123456";
+        session_start();
         // Grabbing the information the user types in the username and password
-        // forms.
         $inputUsername = $_POST["username"];
         $inputPassword = $_POST["password"];
-        global $actionLocation;
     
-        
         // MySQL username and password.
         $MySQLusername = root; // cs3715_tb6774
         $MySQLpassword = root; //purplesilver7
@@ -27,37 +21,31 @@
         
         // Closing the database connection.
         $db = NULL;
-        
-        
-            // Run through the MySQL table  and compare it with the user's input data. 
-            while($rows = $userInfoTable->fetch()) {
+            
+        // Run through the MySQL table  and compare it with the user's input data. 
+        while($rows = $userInfoTable->fetch()) {
             // echo "rows[0]=" . $rows[0] . " rows[1]=" . $rows[1] . " rows[2]=" . $rows[2] . "<br>";
-                if (($rows[1] == $inputUsername) && ($rows[2] == $inputPassword)) {
-                        // header("Location:ExamplePage.html");
-                        $actionLocation = 'action="ExamplePage.html"';
-                        echo "$actionLocation";
-                        break;
-                }
-                else {
-                        // header("Location:LoginSystem.php");
-                        $actionLocation = 'action="LoginSystem.php"';
-                        echo "$actionLocation";
-                }
+            if (($rows[1] == $inputUsername) && ($rows[2] == $inputPassword)) {
+                header("Location:ExamplePage.html");
             }
-    
+            else {
+                // header("Location:LoginSystem.php");
+                echo "Wrong Username or Password";
+            }
+        }
 echo '<html>';
 echo    '<head>';
-echo        '<title>Project Login System</title>';
+echo       '<title>Project Login System</title>';
 echo    '</head>';
 echo    '<body>';
-            //Using POST to get user information in a secure matter.
-echo        '<form '.  $actionLocation. ' method="post">';
+            // Using POST to get user information in a secure matter
+echo        '<form action="LoginSystem.php" method="post">';
 echo            '<label>Username: </label><br>';
-echo            '<input type="text" name="username"><br>'; 
+echo            '<input type="text" name="username"><br>';
 echo            '<label>Password: </label><br>';
-echo            '<input type="text" name="password"><br>'; 
+echo            '<input type="text" name="password"><br>';
 echo            '<input type="submit" value="Log In">';
 echo        '</form>';
-echo     '</body>';
-echo '</html>';
+echo    '</body>';
+echo '</html>';    
 ?>
