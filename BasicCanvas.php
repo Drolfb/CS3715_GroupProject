@@ -84,7 +84,32 @@ function findxy(res, e) {   //finds positioning
         }
     }
 }
+
+
+
+(function () {
+    var timeLeft = 30,
+        cinterval;
+
+    var timeDec = function (){
+        timeLeft--;
+        document.getElementById('countdown').innerHTML = timeLeft;
+        if(timeLeft === 0){
+            clearInterval(cinterval);
+        }
+    };
+    cinterval = setInterval(timeDec, 1000);
+})();
+
+
 </script>
+
+Time Left: <span id="countdown">30</span>.
+
+<?php
+echo "<meta http-equiv=\"refresh\" content=\"30;url=http://localhost/ProjectQ/Works.php\"/>";
+?>
+
 <body onload="init()">
     <canvas id="can" width="600" height="600" style="position:absolute;top:10%;left:10%;border:3px solid;"></canvas>
     <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
