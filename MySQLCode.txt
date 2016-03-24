@@ -1,0 +1,37 @@
+—- RegistrationSystem.php —-
+
+SHOW databases;
+
+USE QuickDraw_Test;
+
+SELECT DATABASE();
+
+SHOW tables;
+
+DESCRIBE UserInfo;
+
+SELECT * FROM UserInfo;
+
+INSERT INTO UserInfo VALUES(NULL, 'John', '123456');
+
+
+
+—- LoginSystem.php —-
+
+
+—- WordBank.php —- 
+
+CREATE TABLE WordBank(
+wordBankID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+firstWord VARCHAR(30) NOT NULL, 
+secondWord VARCHAR(30) NOT NULL);
+// I forgot to make the words unique, we’ll do that in MUN database.
+
+INSERT INTO WordBank VALUES(NULL, 'Red', 'Fox');
+INSERT INTO WordBank VALUES(NULL, 'Fox', 'Red');
+INSERT INTO WordBank VALUES(NULL, 'Elephant', 'Superhero');
+INSERT INTO WordBank VALUES(NULL, 'Superhero', 'Elephant');
+
+SELECT * FROM WordBank;
+
+
