@@ -476,10 +476,11 @@ INSERT INTO Game_abc VALUES("Tyler", NULL);
 
 —- Match.php —- 
 
-mysql> CREATE TABLE Rooms(Room_ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    -> Player1 VARCHAR(15) NULL, 
-    -> Player2 VARCHAR(15) NULL, 
-    -> Player3 VARCHAR(15) NULL); 
-Query OK, 0 rows affected (0.23 sec)
+mysql> CREATE TABLE Rooms(
+    -> Room_ID VARCHAR(30) NOT NULL PRIMARY KEY, 
+    -> Player1 VARCHAR(15) NULL UNIQUE, 
+    -> Player2 VARCHAR(15) NULL UNIQUE, 
+    -> Player3 VARCHAR(15) NULL UNIQUE);
+Query OK, 0 rows affected (0.92 sec)
 
 
