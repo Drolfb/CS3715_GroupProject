@@ -1,9 +1,9 @@
 <?php
-	// For Later***SELECT * FROM UserInfo WHERE Username="Fred" and Password="123456";
 	session_start();	
 	// Grabbing the information the user types in the username and password
 	$inputUsername = $_POST["username"];
 	$inputPassword = $_POST["password"];
+        $cookieName = "QuickDrawLogin";
 
 	// MySQL username and password.
 	$MySQLusername = "cs3715_tb6774"; 
@@ -14,7 +14,7 @@
 	$db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
 
 	// Name of the table we are using for the database.
-	$MySQLtable = 'testUserInfo'; // testUserInfo
+	$MySQLtable = 'AccountInfo'; // testUserInfo
 
 	// Grabbing everything from the table
 	
@@ -27,10 +27,12 @@
 	while($rows = $userInfoTable->fetch()) {
 		// echo "rows[0]=" . $rows[0] . " rows[1]=" . $rows[1] . " rows[2]=" . $rows[2] . "<br>";
 		//if (($rows[1] == $inputUsername) && ($rows[2] == $inputPassword)) {
-		if (($rows[0] == $inputUsername) && ($rows[1] == $inputPassword)) {
-			echo "You are logged in!";
-			setcookie("QuickDrawLogin", $inputUsername, time()+1800, "/"); //Expires in half an hour
-			
+		if (($rows[1] == $inputUsername) && ($rows[2] == $inputPassword)) {
+			echo "You are logged in!<br>";
+                        
+			// setcookie("QuickDrawLogin", $inputUsername, time()+1800, "/"); //Expires in half an hour
+			//echo "Cooker is: ".$_COOKIE["QuickDrawLogin"];
+                         setcookie($cookieName,$inputUsername,time()+3600);
 			$_SESSION['username'] = $inputUsername;  //Passing this stuff to session values now, so no header change
 			break;									 //... which means we now have to manually halt the loop  - Brian
 		}
