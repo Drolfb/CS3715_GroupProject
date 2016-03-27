@@ -16,14 +16,14 @@ $roomID = $_GET[0];
 $MySQLusername = "root"; 
 $MySQLpassword = "root";
 
-// Create database connection using PHP Data Object (PDO).
+// Create database connection using PHP Data Object (PDO). Blatantly copy pasted from Freddie's code
 // When in MUN, make it  $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
 $db = new PDO("mysql:host=localhost;dbname=QuickDraw_Test", $MySQLusername, $MySQLpassword);
 
 // Name of the table we are using for the database.
-$MySQLtable = 'Rooms'; // testUserInfo
+$MySQLtable = 'Rooms'; // change this to whatever the table name is
 
-// Grabbing everything from the table
+// Get row corresponding to room
 
 $room = $db->query('SELECT * from '.$MySQLtable' WHERE RoomID = '.$roomID);
 
@@ -32,7 +32,7 @@ $db = NULL;
 while (true) {
 	if ($room[1] != NULL && $room[2] != NULL && $room[3] != NULL) {
 		//header("Location:BasicCanvas.php?roomID=".$roomID);	//GET request
-		echo $roomID;
+		echo $roomID;	//Redirect through AJAX, it's better this way
 	}
 	else if (connection_aborted()) {
 		error_log ("Script was aborted by the user.");
