@@ -30,13 +30,15 @@ $room = $db->query('SELECT * from '.$MySQLtable' WHERE RoomID = '.$roomID);
 // Closing the database connection.
 $db = NULL;
 while (true) {
-	if ($room[1] != NULL && $room[2] != NULL && $room[3] != NULL) {
+	if ($room[1] != NULL && $room[2] != NULL && $room[3] != NULL) { //Assuming table layout is RoomID, Player1, Player2, Player3, this means table is full
 		//header("Location:BasicCanvas.php?roomID=".$roomID);	//GET request
 		echo $roomID;	//Redirect through AJAX, it's better this way
+		break;
 	}
 	else if (connection_aborted()) {
 		error_log ("Script was aborted by the user.");
 		die();		//Breakpoint in case user closed the connection
+		break;
 	}
 	else {
 		sleep(5);	//Wait 5 seconds and check again for as long as they're willing to wait
