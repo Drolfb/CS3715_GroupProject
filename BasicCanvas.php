@@ -1,5 +1,7 @@
 <?php 
 session_start();
+
+
 if (!isset($_SESSION['username'])) {
 	echo "<script>alert(\"You are not logged in!\"); window.location('./index.php')</script>";
 	die();
@@ -16,6 +18,9 @@ var canvas, ctx, flag = false,
     dot_flag = false;
 var x = "black",
     y = 2;
+
+var convertImage = "./ConvertImage.php";
+    
 function init() {   //creates the canvas
     canvas = document.getElementById('can');
     ctx = canvas.getContext("2d");
@@ -51,11 +56,10 @@ function draw() {  //drawing tool
     ctx.closePath();
 }
 function erase() { //Clears Entire Image from Canvas
-    var m = confirm("Clear Image?");
-    if (m) {
-        ctx.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-    }
+    
+    ctx.clearRect(0, 0, w, h);
+    document.getElementById("canvasimg").style.display = "none";
+    
 }
 function eraseRound() { //Clears Entire Image from Canvas after round is done
         var timeLeft = 31,
@@ -73,10 +77,31 @@ function eraseRound() { //Clears Entire Image from Canvas after round is done
 }
 function save() {   //saves image
     document.getElementById("canvasimg").style.border = "3px solid";
-    var dataURL = canvas.toDataURL();
+    var dataURL = canvas.toDataURL(); // .toDataURL("image/png");
+    // var x64 = btoa(dataURL);
+    var vars = "canvas="+dataURL;
+    
+    if (window.XMLHttpRequest) {
+	xmlhttp = new XMLHttpRequest();
+    } else {
+	xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+    }
+    
+    xmlhttp.onreadystatechange = function() {
+	if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                var resp = xmlhttp.responseText;
+                loginWindow.className = "newPop";
+                loginWindow.innerHTML = resp;
+            }
+        }
+	xmlhttp.open('POST', convertImage, true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xmlhttp.send(vars);
+    
+    
     document.getElementById("canvasimg").src = dataURL;
     document.getElementById("canvasimg").style.display = "inline";
-    var x64 = btoa(dataURL);
+    
 }
 function findxy(res, e) {   //finds positioning
     if (res == 'down') {
@@ -134,13 +159,17 @@ Time Left: <span id="countdown">30</span>.
 		echo "<script>alert('You are not logged in!');</script>";
 		echo "<script>window.location(\"./index.php\")</script>";
 	}
-echo "<meta http-equiv=\"refresh\" content=\"30;url=http://localhost/ProjectQ/Works.php\"/>";
+echo "<meta http-equiv=\"refresh\" content=\"10;url=http://localhost/CS3715_GroupProject_Canvas/ResultScreen.php\"/>";
 ?>
 
 <body onload="init()">
     <canvas id="can" width="600" height="600" style="position:absolute;top:10%;left:10%;border:3px solid;"></canvas>
     <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;">
-    <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:7%;left:10%;">
+    
+    
+    <form method="POST">
+        <input type="button" value="save" id="savebtn" size="30" onclick="save()" style="position:absolute;top:7%;left:10%;">
+    </form>
     <input type="button" value="clear" id="clr" size="23" onclick="erase()" style="position:absolute;top:7%;left:13%;">
 </body>
 </html>
