@@ -1,11 +1,14 @@
 <html><head>
-	<title>QuickDraw - a lightweight drawing contest where all you need is a browser!</title>
+	<title>QuickDraw - a lightweight drawing contest</title>
 	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript">
 		var loginSystem = "./LoginSystem.php";
 		var regSystem = "./RegistrationSystem.php";
 		var cookieName = "QuickDrawLogin";
 		var logoutPage = "./logout.php";
+		var matchPage = "./match.php";
+		var playersQueue = "./PlayersQueue.php";
+		var canvasPage = "./BasicCanvas.php";
 		var loginLink; var loginWindow; var regLink; var regWindow; var profilebtn; var logoutbtn;
 		
 		function load() {
@@ -105,13 +108,58 @@
 					console.log(xmlhttp.responseText);
 				}
 			}
-			xmlhttp.open('GET', logoutPage, true); //calls session_destroy();
+			xmlhttp.open('GET', logoutPage, true); 			//calls session_destroy();
 			xmlhttp.send();
 			setTimeout("location.reload(true);", 2);		//refresh cookie-less page
 		}
 		
 		function eraseCookie() {
 			document.cookie = cookieName +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		}
+		
+		function playNow() {
+			var queueDiv = document.getElementById('queue');
+			queueDiv.className = "shown";
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			xmlhttp.onreadystatechange = function() {
+				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+					var resp = xmlhttp.responseText;
+					queueDiv.innerHTML = resp;
+					if (resp.contains("following")) { //no errors
+						var roomID = document.getElementById('roomIDspan');
+						setTimeout(connectToRoom(roomID), 5000); //Give the user a chance to read the message, also
+																 //PHP script waits 5 seconds between polls
+					}
+				}
+			}
+			xmlhttp.open('GET', playersQueue, true);
+			xmlhttp.send();
+		}
+		
+		function connectToRoom(roomID) {
+			var matchRoom = matchPage + "?roomID=" + roomID;
+			var canvasRoom = canvasPage + "?roomID=" + roomID;
+			if (window.XMLHttpRequest) {
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+			}
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+					var resp = xmlhttp.responseText;
+					if (resp === roomID) {
+						window.location(canvasRoom);
+					} else {
+						document.getElementById('queue').innerHTML = "<h1>" + resp +"</h1>";
+					}
+				}
+			}
+			xmlhttp.open('GET', matchRoom, true);
+			xmlhttp.send();
 		}
 		
 	</script>
@@ -123,7 +171,8 @@
 	</div>
 	<div id="btndiv">
 		<!-- everything in this div will be centered on the screen -->
-		<button class="btn">Play Now!</button><br/>
+		<button class="btn" onclick="playNow();">Play Now!</button><br/>
+		<div id="queue" class="hidden"></div>
 		<button class="btn lilbtn" id="log">Log in</button>
 		<button class="btn lilbtn" id="reg">Register</button><span></span>
 		<button class="btn lilbtn" id="profilebtn" onclick="profile();">Profile</button>

@@ -1,3 +1,11 @@
+<?php 
+session_start();
+if (!isset($_SESSION['username'])) {
+	echo "<script>alert(\"You are not logged in!\"); window.location('./index.php')</script>";
+	die();
+}
+
+?>
 <html>
 <script type="text/javascript">
 var canvas, ctx, flag = false,
@@ -107,6 +115,10 @@ function findxy(res, e) {   //finds positioning
 Time Left: <span id="countdown">30</span>.
 
 <?php
+	if ($logged == false) {
+		echo "<script>alert('You are not logged in!');</script>";
+		echo "<script>window.location(\"./index.php\")</script>";
+	}
 echo "<meta http-equiv=\"refresh\" content=\"30;url=http://localhost/ProjectQ/Works.php\"/>";
 ?>
 
