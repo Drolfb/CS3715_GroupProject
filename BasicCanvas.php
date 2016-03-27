@@ -57,11 +57,26 @@ function erase() { //Clears Entire Image from Canvas
         document.getElementById("canvasimg").style.display = "none";
     }
 }
+function eraseRound() { //Clears Entire Image from Canvas after round is done
+        var timeLeft = 31,
+        cinterval;
+    var timeDec = function (){
+        timeLeft--;
+        document.getElementById('countdown').innerHTML = timeLeft;
+        if(timeLeft === 0){
+            clearInterval(cinterval);
+            ctx.clearRect(0, 0, w, h);
+        document.getElementById("canvasimg").style.display = "none"; 
+        }
+    };
+    cinterval = setInterval(timeDec, 1000);
+}
 function save() {   //saves image
     document.getElementById("canvasimg").style.border = "3px solid";
     var dataURL = canvas.toDataURL();
     document.getElementById("canvasimg").src = dataURL;
     document.getElementById("canvasimg").style.display = "inline";
+    var x64 = btoa(dataURL);
 }
 function findxy(res, e) {   //finds positioning
     if (res == 'down') {
