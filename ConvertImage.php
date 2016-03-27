@@ -2,22 +2,20 @@
 	session_start();
 
 	// MySQL username and password.
-	$MySQLusername = "root"; 
-	$MySQLpassword = "root";
+	$MySQLusername = "cs3715_tb6774"; 
+	$MySQLpassword = "purplesilver7";
+        
         
 	// Create database connection using PHP Data Object (PDO).
 	// When in MUN, make it  $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
-	$db = new PDO("mysql:host=localhost;dbname=QuickDraw_Test", $MySQLusername, $MySQLpassword);
+	$db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
 
 	// Name of the table we are using for the database.
-	$MySQLtable = 'VotingTest'; // testUserInfo
-
-	// Grabbing everything from the table
-	// $votingTestTable = $db->query('SELECT * from '.$MySQLtable);
+        $gameTable = 'Game_abc';
         
         $canvasString = urlencode($_POST['canvas']);
-        echo "<script>console.log(".$canvasString.")</script>";
-        $addCanvasString = "UPDATE ".$MySQLtable." SET CanvasString = '"
+        // echo "<script>console.log(".$canvasString.")</script>";
+        $addCanvasString = "UPDATE ".$gameTable." SET CanvasString = '"
             .$canvasString."' WHERE USERNAME = 'Fred'";
        
         if ($db->query($addCanvasString) == TRUE) {
