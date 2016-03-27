@@ -18,20 +18,468 @@ INSERT INTO UserInfo VALUES(NULL, 'John', '123456');
 
 —- LoginSystem.php —-
 
+CREATE TABLE AccountInfo(
+AccountID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+Username VARCHAR(15) NOT NULL UNIQUE, 
+Password VARCHAR(15) NOT NULL, 
+WINS INT UNSIGNED NOT NULL, 
+LOSSES INT UNSIGNED NOT NULL
+);
+
+INSERT AccountInfo VALUES(NULL, "Fred", "123456", "0", "0");
+INSERT AccountInfo VALUES(NULL, "Brian", "654321", "0", "0");
+INSERT AccountInfo VALUES(NULL, "Tyler", "password", "0", "0");
+
+SELECT * FROM AccountInfo;
+
+
 
 —- WordBank.php —- 
 
-CREATE TABLE WordBank(
-wordBankID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-firstWord VARCHAR(30) NOT NULL, 
-secondWord VARCHAR(30) NOT NULL);
-// I forgot to make the words unique, we’ll do that in MUN database.
+mysql> CREATE TABLE WordBank(
+    -> WordBank INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> Words VARCHAR(30) NOT NULL);
+Query OK, 0 rows affected (0.26 sec)
 
-INSERT INTO WordBank VALUES(NULL, 'Red', 'Fox');
-INSERT INTO WordBank VALUES(NULL, 'Fox', 'Red');
-INSERT INTO WordBank VALUES(NULL, 'Elephant', 'Superhero');
-INSERT INTO WordBank VALUES(NULL, 'Superhero', 'Elephant');
+mysql> INSERT INTO WordBank VALUES(NULL, 'Red');
+Query OK, 1 row affected (0.14 sec)
 
-SELECT * FROM WordBank;
+mysql> INSERT INTO WordBank VALUES(NULL, 'Radiant')
+    -> ;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Yellow');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Green');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fast');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Slow');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Round');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Smart');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Rolling');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Explosive');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Sneaky');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bubbly');
+Query OK, 1 row affected (0.19 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Active');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Adept');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Admirable');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Adorable');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Advanced');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Afraid');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Affectionate');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Aged');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Aggravating');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Brave');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Brief');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bright');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Broken');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Clueless');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Clumsy');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Cluttered');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Hidden');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'High');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Low');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Defiant');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Colossal');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Comfortable');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Wet');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Robot');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Dinosaur');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'House');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Rock');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bell');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Page');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Package');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Umbrella');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Tree');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fox');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Superhero');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Elephant');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Dad');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fragment');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Chaos');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Mailman');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Dustpan');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Toolbox');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Man');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Woman');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Child');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Cat');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Dog');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fence');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Frog');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Snail');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bottle');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bear');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Meal');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Police');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Volcano');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Wealth');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Weather');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Wilderness');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Jellyfish');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Ladybug');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fish');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Crayon');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bird');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Ball');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Bed');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Book');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Cake');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Dress');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fang');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Flag');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Carpet');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Water');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Flower');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Mask');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Underwear');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Vaction');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Vegatable');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Fruit');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Music');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Toaster');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Toothbrush');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Candle');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Grapes');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Computer');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Car');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Batman');
+Query OK, 1 row affected (0.14 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Superman');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Spider-Man');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO WordBank VALUES(NULL, 'Thor');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SELECT * FROM WordBank;
++----------+--------------+
+| WordBank | Words        |
++----------+--------------+
+|        1 | Red          |
+|        2 | Radiant      |
+|        3 | Yellow       |
+|        4 | Green        |
+|        5 | Fast         |
+|        6 | Slow         |
+|        7 | Round        |
+|        8 | Smart        |
+|        9 | Rolling      |
+|       10 | Explosive    |
+|       11 | Sneaky       |
+|       12 | Bubbly       |
+|       13 | Active       |
+|       14 | Adept        |
+|       15 | Admirable    |
+|       16 | Adorable     |
+|       17 | Advanced     |
+|       18 | Afraid       |
+|       19 | Affectionate |
+|       20 | Aged         |
+|       21 | Aggravating  |
+|       22 | Brave        |
+|       23 | Brief        |
+|       24 | Bright       |
+|       25 | Broken       |
+|       26 | Clueless     |
+|       27 | Clumsy       |
+|       28 | Cluttered    |
+|       29 | Hidden       |
+|       30 | High         |
+|       31 | Low          |
+|       32 | Defiant      |
+|       33 | Colossal     |
+|       34 | Comfortable  |
+|       35 | Wet          |
+|       36 | Robot        |
+|       37 | Dinosaur     |
+|       38 | House        |
+|       39 | Rock         |
+|       40 | Bell         |
+|       41 | Page         |
+|       42 | Package      |
+|       43 | Umbrella     |
+|       44 | Tree         |
+|       45 | Fox          |
+|       46 | Superhero    |
+|       47 | Elephant     |
+|       48 | Dad          |
+|       49 | Fragment     |
+|       50 | Chaos        |
+|       51 | Mailman      |
+|       52 | Dustpan      |
+|       53 | Toolbox      |
+|       54 | Man          |
+|       55 | Woman        |
+|       56 | Child        |
+|       57 | Cat          |
+|       58 | Dog          |
+|       59 | Fence        |
+|       60 | Frog         |
+|       61 | Snail        |
+|       62 | Bottle       |
+|       63 | Bear         |
+|       64 | Meal         |
+|       65 | Police       |
+|       66 | Volcano      |
+|       67 | Wealth       |
+|       68 | Weather      |
+|       69 | Wilderness   |
+|       70 | Jellyfish    |
+|       71 | Ladybug      |
+|       72 | Fish         |
+|       73 | Crayon       |
+|       74 | Bird         |
+|       75 | Ball         |
+|       76 | Bed          |
+|       77 | Book         |
+|       78 | Cake         |
+|       79 | Dress        |
+|       80 | Fang         |
+|       81 | Flag         |
+|       82 | Carpet       |
+|       83 | Water        |
+|       84 | Flower       |
+|       85 | Mask         |
+|       86 | Underwear    |
+|       87 | Vaction      |
+|       88 | Vegatable    |
+|       89 | Fruit        |
+|       90 | Music        |
+|       91 | Toaster      |
+|       92 | Toothbrush   |
+|       93 | Candle       |
+|       94 | Grapes       |
+|       95 | Computer     |
+|       96 | Car          |
+|       97 | Batman       |
+|       98 | Superman     |
+|       99 | Spider-Man   |
+|      100 | Thor         |
++----------+--------------+
+100 rows in set (0.00 sec)
+
+—- PlayersQueue.php —-
+
+CREATE TABLE rt90 (rt90_ID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                Username VARCHAR(10) NOT NULL UNIQUE,
+                FOREIGN KEY (Username) REFERENCES AccountInfo(Username));
+
+
+—- CanvasVotingSystem —-
+
+CREATE TABLE VotingTest( 
+Username VARCHAR(15) NOT NULL UNIQUE, 
+CanvasString BLOB NULL,
+FOREIGN KEY(Username) REFERENCES AccountInfo(Username)
+); 
+
+// At MUN
+mysql> CREATE TABLE Game_abc( Username VARCHAR(15) NOT NULL UNIQUE,
+    -> CanvasString BLOB NULL, 
+    -> FOREIGN KEY(Username) REFERENCES AccountInfo(Username)
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+INSERT INTO Game_abc VALUES("Fred", NULL);
+INSERT INTO Game_abc VALUES("Tyler", NULL);
+
+—- Match.php —- 
+
+mysql> CREATE TABLE Rooms(Room_ID BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    -> Player1 VARCHAR(15) NULL, 
+    -> Player2 VARCHAR(15) NULL, 
+    -> Player3 VARCHAR(15) NULL); 
+Query OK, 0 rows affected (0.23 sec)
 
 
