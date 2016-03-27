@@ -64,12 +64,12 @@
 					var resp = xmlhttp.responseText;
 					loginWindow.className = "newPop";
 					loginWindow.innerHTML = resp;
+                                        setTimeout("location.reload(true);", 2000);
 				}
 			}
 			xmlhttp.open('POST', loginSystem, true);
 			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xmlhttp.send(vars);
-			//setTimeout("location.reload(true);", 2);
 		};
 		function register() {
 			var un = document.getElementById('runame').value;
@@ -99,24 +99,19 @@
 		
 		function logout() {
 			
-			eraseCookie();
-			
 			if (window.XMLHttpRequest) {xmlhttp = new XMLHttpRequest();} 
 			else {xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');}
 			xmlhttp.onreadystatechange = function() {
 				if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
 					console.log(xmlhttp.responseText);
+                                        location.reload(true);
 				}
 			}
 			xmlhttp.open('GET', logoutPage, true); 			//calls session_destroy();
 			xmlhttp.send();
-			setTimeout("location.reload(true);", 2);		//refresh cookie-less page
+                        //echo "<meta http-equiv=\"refresh\" content=\"1;url=./index.php\"/>";
+			//setTimeout("location.reload(true)",1);		//refresh cookie-less page
 		}
-		
-		function eraseCookie() {
-			document.cookie = cookieName +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-		}
-		
 		function playNow() {
 			var queueDiv = document.getElementById('queue');
 			queueDiv.className = "shown";
