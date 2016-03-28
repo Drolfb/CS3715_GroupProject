@@ -5,44 +5,49 @@ if (!isset($_SESSION['username'])) {
 	echo '<a href="./index.php">Return to Main Page</a>';
 	die();
 }
+// MySQL username and password.
+$MySQLusername = "cs3715_tb6774"; 
+$MySQLpassword = "purplesilver7";
+
+// Create database connection using PHP Data Object (PDO).
+// When in MUN, make it  $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
+$db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
+
+// Name of the table we are using for the database.
+$MySQLtable = 'AccountInfo'; // testUserInfo
+
+// Grabbing everything from the table
+
+$userInfoTable = $db->query('SELECT * from '.$MySQLtable.' WHERE Username="'.$_SESSION['username'].'"');
+$username = "Error retrieving username";
+$password = "lolwut";
+$pwins = "Error retrieving wins";
+while($rows = $userInfoTable->fetch()) {
+    $username = $rows[1];
+    $pwins = $rows[3];
+}
 ?>
 <html>
 <head>
 	<title></title>
 	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript">
-		var uname = "<?php echo $_SESSION['username'] ?>";
+		  var uname = "<?php echo $username ?>";
+    var pword = "<?php echo $password ?>";
+    var pwins = "<?php echo $pwins ?>";
+    var prank = "Bronze";
 		function getProfile() {
-			var uw = 0;
-			var ul = 1;
-			var ratio = 0;
-			var rank;
-			if (ul === 0 && uw === 0) {
-				ratio = 0;
-			} else if (uw > 0 && ul === 0) {
-				ratio = 100;
-			} else {
-				ratio = Math.round(uw/ul);
-			}
-			
-			if (ratio < 20) {
-				rank = "Bronze";
-			} else if (ratio < 40) {
-				rank = "Silver";
-			} else if (ratio < 60) {
-				rank = "Gold";
-			} else if (ratio < 80) {
-				rank = "Platinum";
-			} else {
-				rank = "Diamond";
-			}
-
-			document.getElementsByTagName('title').innerHTML = uname +"'s Profile - QuickDraw";
-			document.getElementById("name").innerHTML = uname + "'s Stats";
-			document.getElementById("tablew").innerHTML = "No wins";
-			document.getElementById("tablel").innerHTML = "No losses";
-			document.getElementById("tablep").innerHTML = ratio;
-			document.getElementById("tabler").innerHTML = rank;
+      if (pwins > 29) {
+          prank = "Platinum";
+      } else if (pwins > 19) {
+          prank = "Gold";
+      } else if (pwins > 9) {
+          prank = "Silver";
+      }
+      document.getElementsByTagName('title')[0].innerHTML = uname +"'s Profile - QuickDraw";
+      document.getElementById("name").innerHTML = uname + "'s Stats";
+      document.getElementById("tablew").innerHTML = pwins;
+      document.getElementById("tabler").innerHTML = prank;
 		}
 	</script>
 </head>
@@ -52,14 +57,10 @@ if (!isset($_SESSION['username'])) {
 		<table>
 			<tr>
 				<th>Wins</th>
-				<th>Losses</th>
-				<th>W/L Ratio</th>
 				<th>Rank</th>
 			</tr>
 			<tr>
 				<td id="tablew" class="stats"></td>
-				<td id="tablel" class="stats"></td>
-				<td id="tablep" class="stats"></td>
 				<td id="tabler" class="stats"></td>
 			</tr>
 		</table><br/>
