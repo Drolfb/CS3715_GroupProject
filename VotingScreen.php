@@ -21,17 +21,20 @@ $imgHeight = 600/$playerCount;  //Shrink the canvas so all the players' drawings
 
 $count = 0;
 $db = NULL; // Closing the database connection.
+echo '<div id="imgdiv">';
 while($rows = $gameTableInfo->fetch()) {
     $image = str_replace("+", "%2B", $rows['CanvasString']);
     $image = urldecode($image);
     $un = $rows['Username'];
-    echo '<img height="'.$imgHeight.'" id="'.$un.'" src="'.$image.'">';
+    echo '<img class="userImage" height="'.$imgHeight.'" id="'.$un.'" src="'.$image.'">';
     $count++;
 }
-echo '<meta http-equiv="refresh" content="10;url=http://localhost/Phpproject2/ResultPage.php"/>';
+echo '<br/></div>';
+echo '<meta http-equiv="refresh" content="100;url=http://localhost/Phpproject2/ResultPage.php"/>';
 ?>
 <html>
     <head>
+        <link rel="stylesheet" href="style.css">
         <script type="text/javascript">
             var imgs = document.getElementsByTagName('img');
             console.log('why');
@@ -46,7 +49,7 @@ echo '<meta http-equiv="refresh" content="10;url=http://localhost/Phpproject2/Re
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                         var resp = xmlhttp.responseText;
-                        document.getElementById('btndiv').innerHTML = resp;
+                        document.getElementById('out').innerHTML = resp;
                     }
                 };
                 xmlhttp.open('GET', voteScript, true);
@@ -54,6 +57,7 @@ echo '<meta http-equiv="refresh" content="10;url=http://localhost/Phpproject2/Re
                 
             };
             function init() {
+                document.getElementById('imgdiv').setAttribute("align", "justify");
                 var imgs = document.getElementsByTagName('img');
                 for (var i = 0; i < imgs.length; i++) {
                     var id = imgs[i].getAttribute("id");
@@ -79,8 +83,9 @@ echo '<meta http-equiv="refresh" content="10;url=http://localhost/Phpproject2/Re
         <title>Results</title>
     </head>
     <body onload=init()>
-        <div id="btndiv"></div>
+        <div class="ctndiv">Time Left To Vote: <span id="countdown">10</span>.</div>
+        <div id="out"></div>
     </body>
         
 </html>
-Time Left To Vote: <span id="countdown">10</span>.
+

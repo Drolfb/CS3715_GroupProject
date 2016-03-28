@@ -38,6 +38,31 @@
 	height:20%;
 	display:inline-block;
 }
+#out {
+    width:50%;
+    margin:auto;
+    text-align:center;
+}
+.userImage {
+    position:relative;
+    top:10%;
+    left:10%;
+    border:3px solid;
+    display:inline-block;
+    margin:20px;
+    vertical-align:top;
+}
+.ctndiv {
+    margin:auto; 
+    width:11em;
+    padding:10px;
+    background-color:#ff7361;
+    border: 3px solid #000000;
+    border-radius: 8px;
+    text-align:center;
+    font-family: Helvetica,Lucinda,sans-serif;
+    font-size: 2vw;
+}
 #can {
     position:absolute;
     top:10%;
@@ -54,9 +79,9 @@
     display:none;
 }
 body {
-	background-image:radial-gradient(#fff, #e1e8ed);
-	margin: 0;
-	padding: 0;
+	   background-image:radial-gradient(#fff, #e1e8ed);
+	   margin: 0;
+	   padding: 0;
 }
 .newPop {
 	padding:6px 12px;
