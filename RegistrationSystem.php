@@ -21,7 +21,7 @@ $MySQLpassword = "purplesilver7";
 $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
         
 // Name of the table we are using for the database.
-$MySQLtable = 'testUserInfo';
+$MySQLtable = 'AccountInfo';
 
 // Grabbing everything from the table
 $userInfoTable = $db->query('SELECT * from '.$MySQLtable); 
@@ -38,7 +38,7 @@ while($rows = $userInfoTable->fetch()) {
 }
         
 if (!$duplicateUsername) {
-    $insertionCode = "INSERT INTO UserInfo VALUES(NULL, '". $inputUsername . "', '" . $inputPassword . "')";
+    $insertionCode = "INSERT INTO AccountInfo VALUES(NULL, '". $inputUsername . "', '" . $inputPassword . "')";
     if ($db->query($insertionCode) == TRUE) {
         echo "New Record created Successfully";
     }
