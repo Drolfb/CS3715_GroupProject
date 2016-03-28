@@ -123,10 +123,10 @@
                 if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                     var resp = xmlhttp.responseText;
                     queueDiv.innerHTML = resp;
-                    if (resp.contains("following")) { //no errors
-                    var roomID = document.getElementById('roomIDspan');
-                    setTimeout(connectToRoom(roomID), 5000); //Give the user a chance to read the message, also
-                                                             //PHP script waits 5 seconds between polls
+                    if (resp.indexOf("following") > -1 || resp.indexOf("Joining") > -1) { //no errors
+                        var roomID = document.getElementById('roomIDspan');
+                        setTimeout(connectToRoom(roomID), 5000); //Give the user a chance to read the message, also
+                                                                 //PHP script waits 5 seconds between polls
                     }
                 }
             }
