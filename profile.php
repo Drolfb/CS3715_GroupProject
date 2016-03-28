@@ -63,7 +63,7 @@ if (!isset($_SESSION['username'])) {
 				<td id="tabler" class="stats"></td>
 			</tr>
 		</table><br/>
-		<a href="/index.html">Back to main page</a>
+		<a href="./index.php">Back to main page</a>
 	</div>
 </body>
 </html>

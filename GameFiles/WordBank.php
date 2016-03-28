@@ -24,22 +24,15 @@
             
         // Run through the MySQL table  and compare it with the user's input data. 
         while($rows = $randomWord1->fetch()) {
-            echo "$rows[0] ";
+//            echo "$rows[0] ";
             $randomSentence = $rows[0] . " ";
         }
         
         while($rows = $randomWord2->fetch()) {
-            echo " $rows[0] <br>";
+//            echo " $rows[0] <br>";
             $randomSentence = $randomSentence . $rows[0];
             
         }
         
-        echo "The random sentence is: $randomSentence";
-echo '<html>';
-echo    '<head>';
-echo       '<title>Project Login System</title>';
-echo    '</head>';
-echo    '<body>';
-echo    '</body>';
-echo '</html>';    
+        echo "$randomSentence";
 ?>
