@@ -6,7 +6,7 @@
             die();
         }
 
-        if (!isset($_GET[0])) {
+        if (!isset($_GET['username'])) {
             echo "Malformed request. Please return to the <a href=\"./index.php\">home page</a> and try again.";
         }
 
@@ -19,18 +19,6 @@
 	$db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
 
         $rooms = "Rooms";
-        
-         // Creating the room name.
-        echo "The following is an unique ID <br><span id=\"roomIDspan\">";
-        echo "$randomTableName" + "</span>";
-        
-        // MySQL code to create the unique string table.
-        $createRandomTable = "CREATE TABLE Game_$randomTableName (Game_"
-        .$randomTableName."_ID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, "
-                . "Username VARCHAR(10) NOT NULL UNIQUE, "
-                . " FOREIGN KEY (Username) REFERENCES AccountInfo(Username))";
-        
-        
         
         $roomList = $db->query('SELECT * from '.$rooms);
         
@@ -47,7 +35,7 @@
                         echo "Duplicate Name"; break; 
                     }
                     if ($db->query($joinQuery) == TRUE) {
-                        echo "<br> Joining as Player1<br>";
+                        echo "<br> Joining as Player1 with the following Room ID: <span id=\"roomIDspan\">".$rows[0]."</span><br>";
                     } else {
                         echo "<br> Can't Join as Player1 ".$db->error;
                     }
@@ -57,7 +45,7 @@
                     } else {
                         $joinQuery = 'UPDATE '.$rooms.' SET Player2="'.$_SESSION['username'].'" WHERE Room_ID="'.$rows[0].'"';
                         if ($db->query($joinQuery) == TRUE) {
-                            echo "<br> Joining as Player2<br>";
+                            echo "<br> Joining as Player2 with the following Room ID: <span id=\"roomIDspan\">".$rows[0]."</span><br>";
                         } else {
                             echo "<br> Can't Join as Player2 ".$db->error;
                         }
@@ -69,7 +57,7 @@
                         $joinQuery = 'UPDATE '.$rooms.' SET Player3="'.$_SESSION['username'].'" WHERE Room_ID="'.$rows[0].'"';
                     
                         if ($db->query($joinQuery) == TRUE) {
-                            echo "<br> Joining as Player3<br>";
+                            echo "<br> Joining as Player3 with the following Room ID: <span id=\"roomIDspan\">".$rows[0]."</span><br>";
                         } else {
                             echo "<br> Can't Join as Player3 ".$db->error;
                         }
@@ -87,9 +75,11 @@
         if ($roomsFull) {
             $user = "User";
             $randomTableName = substr(uniqid('', true), -8); // Creating the room name.
+            echo "The following is an unique ID <br><span id=\"roomIDspan\">";
+            echo "$randomTableName" + "</span>";
             $joinQuery = 'INSERT IGNORE INTO '.$rooms.' Values("Game_'.$randomTableName.'","'.$_SESSION['username'].'", NULL, NULL)';
             if ($db->query($joinQuery) == TRUE) {
-                echo "<br> Mamking a new game!!! <br>";
+                echo "<br> Making a new game!!! <br>";
             } else {
                 echo "<br> Can't Make a New Game ".$db->error;
             }
