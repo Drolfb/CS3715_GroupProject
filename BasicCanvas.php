@@ -178,8 +178,8 @@ echo '<meta http-equiv="refresh" content="30;url=http://localhost/my-site/Voting
 ?>
 
 <body onload="init()">
-    <canvas id="can" width="600" height="600" style="position:absolute;top:10%;left:10%;border:3px solid;"></canvas>
-    <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;"><br/>
+    <canvas id="can"></canvas>
+    <img id="canvasimg"><br/>
     <div id="worddiv"></div>
     
     

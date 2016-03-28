@@ -33,9 +33,8 @@ while($rows = $gameTableInfo->fetch()) {
     <head>
         <script type="text/javascript">
             var imgs = document.getElementsByTagName('img');
-            console.log('why');
             var vote = function(j) {
-                console.log(j);
+                console.log("Voted for: " + j);
                 var voteScript = "./vote.php?uname="+j;
                 if (window.XMLHttpRequest) {
                     xmlhttp = new XMLHttpRequest;

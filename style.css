@@ -38,6 +38,21 @@
 	height:20%;
 	display:inline-block;
 }
+#can {
+    position:absolute;
+    top:10%;
+    left:10%;
+    border:3px solid;
+    width:600;
+    height:600;
+}
+#canvasimg {
+    position:absolute;
+    top:10%;
+    left:65%; 
+    height:200;
+    display:none;
+}
 body {
 	background-image:radial-gradient(#fff, #e1e8ed);
 	margin: 0;
