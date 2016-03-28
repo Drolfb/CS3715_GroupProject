@@ -77,7 +77,7 @@
             $randomTableName = substr(uniqid('', true), -8); // Creating the room name.
             echo "The following is an unique ID <br><span id=\"roomIDspan\">";
             echo "$randomTableName" + "</span>";
-            $joinQuery = 'INSERT IGNORE INTO '.$rooms.' Values("Game_'.$randomTableName.'","'.$_SESSION['username'].'", NULL, NULL)';
+            $joinQuery = 'INSERT INTO '.$rooms.' Values("Game_'.$randomTableName.'","'.$_SESSION['username'].'", NULL, NULL)';
             if ($db->query($joinQuery) == TRUE) {
                 echo "<br> Making a new game!!! <br>";
             } else {
