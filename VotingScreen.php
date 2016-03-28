@@ -28,13 +28,15 @@ while($rows = $gameTableInfo->fetch()) {
     echo '<img height="'.$imgHeight.'" id="'.$un.'" src="'.$image.'">';
     $count++;
 }
+echo '<meta http-equiv="refresh" content="10;url=http://localhost/Phpproject2/ResultPage.php"/>';
 ?>
 <html>
     <head>
         <script type="text/javascript">
             var imgs = document.getElementsByTagName('img');
+            console.log('why');
             var vote = function(j) {
-                console.log("Voted for: " + j);
+                console.log(j);
                 var voteScript = "./vote.php?uname="+j;
                 if (window.XMLHttpRequest) {
                     xmlhttp = new XMLHttpRequest;
@@ -59,6 +61,20 @@ while($rows = $gameTableInfo->fetch()) {
                     imgs[i].setAttribute("onclick", voteString);
                 }
             }
+    (function () {
+        var timeLeft = 10,
+            cinterval;
+
+        var timeDec = function (){
+            timeLeft--;
+            document.getElementById('countdown').innerHTML = timeLeft;
+            if(timeLeft === 0){
+                clearInterval(cinterval);
+            }
+        };
+        cinterval = setInterval(timeDec, 1000);
+    })();
+
         </script>
         <title>Results</title>
     </head>
@@ -67,3 +83,4 @@ while($rows = $gameTableInfo->fetch()) {
     </body>
         
 </html>
+Time Left To Vote: <span id="countdown">10</span>.
