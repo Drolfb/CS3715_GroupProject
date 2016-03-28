@@ -6,26 +6,26 @@ if (!isset($_SESSION['username'])) {
 	die();
 }
 
-if (!isset($_GET[0])) {
+if (!isset($_GET['roomID'])) {
 	echo "Malformed request. Please return to the <a href=\"./index.php\">home page</a> and try again.";
 }
 
-$roomID = $_GET[0];
+$roomID = $_GET['roomID'];
 
 // MySQL username and password.
-$MySQLusername = "root"; 
-$MySQLpassword = "root";
+$MySQLusername = "cs3715_tb6774"; 
+$MySQLpassword = "purplesilver7";
 
 // Create database connection using PHP Data Object (PDO). Blatantly copy pasted from Freddie's code
 // When in MUN, make it  $db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
-$db = new PDO("mysql:host=localhost;dbname=QuickDraw_Test", $MySQLusername, $MySQLpassword);
+$db = new PDO("mysql:host=mysql.cs.mun.ca;dbname=cs3715_tb6774", $MySQLusername, $MySQLpassword);
 
 // Name of the table we are using for the database.
 $MySQLtable = 'Rooms'; // change this to whatever the table name is
 
 // Get row corresponding to room
 
-$room = $db->query('SELECT * from '.$MySQLtable' WHERE RoomID = '.$roomID);
+$room = $db->query('SELECT * from '.$MySQLtable.' WHERE RoomID = '.$roomID);
 
 // Closing the database connection.
 $db = NULL;
