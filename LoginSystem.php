@@ -4,9 +4,9 @@ session_start();
 $inputUsername = $_POST["username"];
 $inputPassword = $_POST["password"];
 $cookieName = "QuickDrawLogin";
-if (preg_match("^[0-9A-Za-z_]+$", $inputUsername) == 0) {
-    echo "<p>Usernames are limited to numbers, letters, and underscores ( _ ).</p>";
-}
+//if (preg_match("^[0-9A-Za-z_]+$", $inputUsername) == 0) {
+//    echo "<p>Usernames are limited to numbers, letters, and underscores ( _ ).</p>";
+//}
 
 // MySQL username and password.
 $MySQLusername = "cs3715_tb6774"; 
