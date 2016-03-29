@@ -28,4 +28,16 @@
                 }
             }
         }
+        
+        $gameTable = "SESSIONVariable";
+        $dropTable = "DROP TABLE IF EXISTS ".$gameTable;
+        
+        // Creating the random table
+        if ($db->query($dropTsable) == TRUE) {
+            echo "Drop table successfully";
+        } else {
+            echo "Error dropping table: " . $db->error;
+        }
+        
+        echo '<a href="./index1.php">Back to Main Page</a>';
 ?>
